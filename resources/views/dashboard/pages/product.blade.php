@@ -112,20 +112,81 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('product.index') }}", // Correct route for fetching product index
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'description',
-                    name: 'description'
-                },
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'name', name: 'name' },
+                { data: 'description', name: 'description' },
                 {
                     data: 'image',
                     name: 'image',
                     render: function(data, type, full, meta) {
-                        return '<img src="{{ asset('uploads') }}/' + data + '" class="img-thumbnail" width="50">'; } }, { data: 'price', name: 'price' }, { data: 'stock', name: 'stock' }, { data: 'store_id', name: 'store_id' }, { data: 'action', name: 'action', orderable: false, searchable: false } ] }); // AJAX form submission $('#uploadProductForm').on('submit', function(e) { e.preventDefault(); let formData = new FormData(this); $.ajax({ url: "{{ route('product.store') }}", type: 'POST', data: formData, processData: false, contentType: false, success: function(response) { alert('Product uploaded successfully'); // Reload the DataTable table.ajax.reload(); }, error: function(response) { let errors = response.responseJSON.errors; showValidationErrors(errors); } }); }); // Delete product $('#productTable').on('click', '.delete-btn', function() { var id = $(this).data('id'); if (confirm('Are you sure you want to delete this product?')) { $.ajax({ url: '/product/' + id, type: 'DELETE', data: { "_token": "{{ csrf_token() }}" }, success: function(response) { alert('Product deleted successfully'); // Reload the DataTable table.ajax.reload(); } }); } }); // Function to display validation errors function showValidationErrors(errors) { $('#errorList').empty(); $.each(errors, function(key, error) { $('#errorList').append('<li>' + error[0] + '</li>'); }); $('#errorAlert').removeClass('d-none'); } }); </script>
+                        return '<img src="{{ asset('uploads') }}/' + data + '" class="img-thumbnail" width="50">';
+                    }
+                },
+                { data: 'price', name: 'price' },
+                { data: 'stock', name: 'stock' },
+                { data: 'store_id', name: 'store_id' },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ]
+        });
+
+        // AJAX form submission
+        $('#uploadProductForm').on('submit', function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                url: "{{ route('product.store') }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    alert('Product uploaded successfully');
+                    // Reload the DataTable
+                    table.ajax.reload();
+                },
+                error: function(response) {
+                    let errors = response.responseJSON.errors;
+                    showValidationErrors(errors);
+                }
+            });
+        });
+
+        // Delete product
+        $('#productTable').on('click', '.delete-btn', function() {
+            var id = $(this).data('id');
+            if (confirm('Are you sure you want to delete this product?')) {
+                $.ajax({
+                    url: '/product/' + id,
+                    type: 'DELETE',
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        alert('Product deleted successfully');
+                        // Reload the DataTable
+                        table.ajax.reload();
+                    },
+                    error: function(response) {
+                        alert('Error deleting product');
+                    }
+                });
+            }
+        });
+
+        // Function to display validation errors
+        function showValidationErrors(errors) {
+            $('#errorList').empty();
+            $.each(errors, function(key, error) {
+                $('#errorList').append('<li>' + error[0] + '</li>');
+            });
+            $('#errorAlert').removeClass('d-none');
+        }
+    });
+</script>
+

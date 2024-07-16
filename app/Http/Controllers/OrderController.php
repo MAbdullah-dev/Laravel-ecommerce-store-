@@ -1,15 +1,20 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Cart;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
 {
+    public function orderpage()
+    {
+        return view('dashboard.pages.orders');
+    }
     public function checkout()
     {
         $userId = Auth::id();
@@ -59,4 +64,58 @@ class OrderController extends Controller
             return response()->json(['message' => 'Error placing order', 'error' => $e->getMessage()], 500);
         }
     }
+    public function getOrders()
+    {
+        $store_id = Auth::user()->store->id;
+        $orders = Order::with('user')->where('store_id', $store_id)->get();
+
+        return DataTables::of($orders)
+            ->addColumn('action', function ($order) {
+                $approveUrl = route('orders.approve', $order->id);
+                $rejectUrl = route('orders.reject', $order->id);
+
+                $actions = '<a href="' . route('order.items', $order->id) . '" class="btn btn-primary">View Items</a>';
+
+                if ($order->status == 'Pending') {
+                    $actions .= '<a href="'.$approveUrl.'" class="btn btn-success btn-sm">Approve</a>';
+                    $actions .= '<a href="'.$rejectUrl.'" class="btn btn-danger btn-sm">Reject</a>';
+                }
+
+                return $actions;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+
+    }
+    public function getOrderItems($id)
+    {
+        $orderItems = OrderItem::where('order_id',$id)->with('product')->get();
+
+        // foreach($orderItems as $items){
+        //     dd($items->product->name);
+        // }
+
+        return view('dashboard.pages.orderItems', compact('orderItems'));
+    }
+
+    public function approveOrder($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update(['status' => 'Approved']);
+
+        // Any additional logic related to approving the order
+
+        return redirect()->back()->with('success', 'Order approved successfully.');
+    }
+
+    public function rejectOrder($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update(['status' => 'Rejected']);
+
+        // Any additional logic related to rejecting the order
+
+        return redirect()->back()->with('success', 'Order rejected successfully.');
+    }
+
 }

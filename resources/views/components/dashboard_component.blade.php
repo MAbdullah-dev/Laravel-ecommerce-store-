@@ -160,7 +160,7 @@
                 <div class="collapse" id="icons">
                   <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                      <a class="nav-link" href="">ORDER TABLE</a>
+                      <a class="nav-link" href="{{ route('orders.page') }}">ORDER TABLE</a>
                     </li>
                   </ul>
                 </div>

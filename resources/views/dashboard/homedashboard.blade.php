@@ -12,7 +12,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page">
                             <span></span>Overview <i
-                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                                class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                         </li>
                     </ul>
                 </nav>
@@ -48,9 +48,9 @@
                     <div class="card bg-gradient-success card-img-holder text-white">
                         <div class="card-body">
                             <img src="{{ asset('dashboardAssets/assets/images/dashboard/circle.svg') }}"
-                            class="card-img-absolute" alt="circle-image" />
+                                class="card-img-absolute" alt="circle-image" />
                             <h4 class="font-weight-normal mb-3">Visitors Online <i
-                                class="mdi mdi-diamond mdi-24px float-end"></i>
+                                    class="mdi mdi-diamond mdi-24px float-end"></i>
                             </h4>
                             <h2 class="mb-5">95,5741</h2>
                             <h6 class="card-text">Increased by 5%</h6>
@@ -105,12 +105,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <td>{{ $user->id }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                            </tr>
+                                        @endforeach
 
                                     </tbody>
                                 </table>
@@ -125,14 +126,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
+                                    @foreach ($store_owners as $store_owner)
                                         <tr>
-                                            <td></td>
-                                            <td>></td>
-                                            <td>
-                                                <>
-                                            </td>
-                                            <td></td>
+                                            <td>{{ $store_owner->id }}</td>
+                                            <td>{{ $store_owner->store->name }}</td>
+                                            <td>{{ $store_owner->name }}</td>
+                                            <td>{{ $store_owner->email }}</td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -366,4 +368,4 @@
         </footer>
         <!-- partial -->
     </div>
- </x-dashboard_component>
+</x-dashboard_component>

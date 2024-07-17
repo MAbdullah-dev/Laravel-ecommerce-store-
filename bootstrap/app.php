@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ValidRole;
 use App\Http\Middleware\ValidUser;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -13,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'IsUserValid'=>ValidUser::class,
+            'isValidUser'=>ValidUser::class,
+             'validRole'=>ValidRole::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

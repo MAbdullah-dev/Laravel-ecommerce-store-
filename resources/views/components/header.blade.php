@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,7 +50,8 @@
                         <div class="header-left d-flex align-items-center">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href=""><img src="{{ asset('assets/img/logo/logo.png') }}" alt=""></a>
+                                <a href=""><img src="{{ asset('assets/img/logo/logo.png') }}"
+                                        alt=""></a>
                             </div>
                             <!-- Main-menu -->
                             <div class="main-menu  d-none d-lg-block">
@@ -67,9 +69,15 @@
                                             </ul> -->
                                         </li>
                                         <li><a href="{{ route('contact') }}">Contact</a></li>
-                                        <li><a href="{{ route('dashboard.page') }}"><img
-                                                    src="https://img.icons8.com/?size=100&id=XnHBz2LnhELw&format=png&color=000000"
-                                                    style="max-width: 30px;" alt="dashboard icon"></a></li>
+                                        @if (Auth::user()->role_id == 1)
+                                            <li><a href="{{ route('dashboard.page') }}"><img
+                                                        src="https://img.icons8.com/?size=100&id=XnHBz2LnhELw&format=png&color=000000"
+                                                        style="max-width: 30px;" alt="dashboard icon"></a></li>
+                                        @elseif (Auth::user()->role_id == 2)
+                                            <li><a href="{{ route('product.crud.page') }}"><img
+                                                        src="https://img.icons8.com/?size=100&id=XnHBz2LnhELw&format=png&color=000000"
+                                                        style="max-width: 30px;" alt="dashboard icon"></a></li>
+                                        @endif
                                     </ul>
                                 </nav>
                             </div>
@@ -77,8 +85,8 @@
                         <div class="header-right1 d-flex align-items-center">
                             <!-- Social -->
                             <div class="header-social d-none d-md-block">
-                                <a href="{{ route('logout') }}"><i
-                                        style="font-size: 18px;font-weight: 800;" class="ri-logout-box-line"></i></a>
+                                <a href="{{ route('logout') }}"><i style="font-size: 18px;font-weight: 800;"
+                                        class="ri-logout-box-line"></i></a>
                                 <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
                                 <a href="#"><i class="fab fa-pinterest-p"></i></a>
                             </div>
@@ -147,4 +155,3 @@
     </header>
     <!-- header end -->
     <!--? Hero Area Start-->
-

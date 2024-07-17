@@ -24,5 +24,9 @@ class FrontendController extends Controller
         $products=Product::all();
         return view('frontend.shop',compact('products'));
     }
+    public function unauthorized_acess()
+    {
+        return view('frontend.unauthorized_access');
+    }
 
 }

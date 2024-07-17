@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+.shoprow
+{
+    display: flex;
+    flex-wrap: nowrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
 .white-bg
 {
     background: #ffffff
@@ -7310,6 +7317,11 @@ hr
     .bradcam_area
     {
         padding: 150px 0
+    }
+}
+@media (max-width:1060px) {
+    .shoprow{
+        flex-wrap: wrap;
     }
 }
 

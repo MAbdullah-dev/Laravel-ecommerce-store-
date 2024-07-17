@@ -74,7 +74,7 @@ class OrderController extends Controller
                 $approveUrl = route('orders.approve', $order->id);
                 $rejectUrl = route('orders.reject', $order->id);
 
-                $actions = '<a href="' . route('order.items', $order->id) . '" class="btn btn-primary">View Items</a>';
+                $actions = '<a href="' . route('order.items', $order->id) . '" class="btn btn-primary btn-sm">View Items</a>';
 
                 if ($order->status == 'Pending') {
                     $actions .= '<a href="'.$approveUrl.'" class="btn btn-success btn-sm">Approve</a>';

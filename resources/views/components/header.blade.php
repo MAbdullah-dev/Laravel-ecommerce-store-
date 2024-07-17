@@ -98,15 +98,16 @@
                                             <i class="ti-search"></i>
                                         </div>
                                     </li>
-
+                                    @if (Auth::user()->role_id==3)
                                     <a href="{{ route('cart.get') }}">
                                         <li class="list-inline-item dropdown">
-                                            <div class="card-stor" <b>checkout here</b><i
-                                                    class="ri-shopping-cart-fill"></i>
+                                            <div class="card-stor">
+                                                <i class="ri-shopping-cart-fill"></i>
                                                 <!-- <span>0</span> -->
                                             </div>
                                         </li>
                                     </a>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

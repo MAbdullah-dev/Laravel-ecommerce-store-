@@ -8,7 +8,7 @@
                                     <!-- Hero Caption -->
                                     <div class="hero__caption">
                                         <h1>fashion<br>changing<br>always</h1>
-                                        <a href="{{ rout('shop') }}" class="btn">Shop Now</a>
+                                        <a href="" class="btn">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -22,7 +22,7 @@
                                     <!-- Hero Caption -->
                                     <div class="hero__caption">
                                         <h1>fashion<br>changing<br>always</h1>
-                                        <a href="{{ route('shop') }}" class="btn">Shop Now</a>
+                                        <a href="" class="btn">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                     <!-- Hero Caption -->
                                     <div class="hero__caption">
                                         <h1>fashion<br>changing<br>always</h1>
-                                        <a href="{{ route('shop') }}" class="btn">Shop Now</a>
+                                        <a href="" class="btn">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                     <span>Glasses</span>
                                 </div>
                                 <div class="favorit-items">
-                                 <a href="{{ route('shop') }}" class="btn">Shop Now</a>
+                                 <a href="" class="btn">Shop Now</a>
                              </div>
                          </div>
                      </div>
@@ -71,7 +71,7 @@
                                 <span>Watches</span>
                             </div>
                             <div class="favorit-items">
-                             <a href="{{ route('shop') }}" class="btn">Shop Now</a>
+                             <a href="" class="btn">Shop Now</a>
                          </div>
                      </div>
                  </div>
@@ -84,7 +84,7 @@
                             <span>Jackets</span>
                         </div>
                         <div class="favorit-items">
-                         <a href="{{ route('shop') }}" class="btn">Shop Now</a>
+                         <a href="" class="btn">Shop Now</a>
                      </div>
                  </div>
              </div>
@@ -97,7 +97,7 @@
                         <span>Clothes</span>
                     </div>
                     <div class="favorit-items">
-                     <a href="{{ route('shop') }}" class="btn">Shop Now</a>
+                     <a href="" class="btn">Shop Now</a>
                  </div>
              </div>
          </div>
@@ -122,7 +122,7 @@
 <!-- Button -->
 <div class="row justify-content-center">
     <div class="room-btn">
-        <a href="{{ route('shop') }}" class="border-btn">Browse More</a>
+        <a href="catagori.html" class="border-btn">Browse More</a>
     </div>
 </div>
 </div>
@@ -135,7 +135,7 @@
         <div class="col-xl-7 col-lg-9">
             <div class="single-question text-center">
                 <h2 class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".1s">collection houses our first-ever</h2>
-                <a href="{{ route('about') }}" class="btn class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".4s">About Us</a>
+                <a href="" class="btn class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".4s">About Us</a>
             </div>
         </div>
     </div>

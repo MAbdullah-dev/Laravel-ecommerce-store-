@@ -24,7 +24,7 @@
                 <div class="col-xl-9 col-lg-9 col-md-8 ">
                     <!--? New Arrival Start -->
                     <div class="new-arrival new-arrival2">
-                        <div class="row">
+                        <div class="shoprow">
                             @foreach ($products as $product)
 
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">

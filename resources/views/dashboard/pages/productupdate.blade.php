@@ -1,4 +1,7 @@
 <x-dashboard_component>
+    <x-slot name="title">
+        Product update Page
+      </x-slot>
     <div class="row">
         <div class="col-12 grid-margin stretch-card">
             <div class="card">

@@ -1,5 +1,7 @@
 <x-dashboard_component>
-
+    <x-slot name="title">
+        Dashboard Page
+      </x-slot>
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">

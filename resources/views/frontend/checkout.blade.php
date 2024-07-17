@@ -1,4 +1,8 @@
-<x-header></x-header>
+<x-header>
+    <x-slot name="title">
+        Checkout page
+      </x-slot>
+</x-header>
 
 <main>
     <!-- breadcrumb Start-->
@@ -223,6 +227,7 @@
         </div>
     </div>
     <x-footer></x-footer>
+
     <script>
         $(document).ready(function() {
             $('.remove-btn').on('click', function() {

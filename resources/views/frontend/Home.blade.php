@@ -1,4 +1,8 @@
-<x-header></x-header>
+<x-header>
+    <x-slot name="title">
+        Home page
+      </x-slot>
+</x-header>
   <div class="slider-active dot-style">
                     <!-- Single -->
                     <div class="single-slider slider-bg1 hero-overly slider-height d-flex align-items-center">

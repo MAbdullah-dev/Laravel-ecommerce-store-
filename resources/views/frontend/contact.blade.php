@@ -1,4 +1,8 @@
-<x-header></x-header>
+<x-header>
+    <x-slot name="title">
+        Contact page
+      </x-slot>
+</x-header>
 <main>
     <!-- breadcrumb Start-->
     <div class="page-notification page-notification2">

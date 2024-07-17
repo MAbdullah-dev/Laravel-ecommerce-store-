@@ -1,4 +1,7 @@
 <x-dashboard_component>
+    <x-slot name="title">
+        Order Page
+      </x-slot>
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">

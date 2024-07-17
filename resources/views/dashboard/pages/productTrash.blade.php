@@ -17,7 +17,7 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Insert your New Product</h4>
+                            <h4 class="card-title">Products Trash</h4>
                             <div class="container mt-5">
                                 <table class="table">
                                     <thead>

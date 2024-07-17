@@ -1,15 +1,12 @@
 <x-dashboard_component>
     <x-slot name="title">
         Products Page
-      </x-slot>
+    </x-slot>
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">
-                <!-- <h3 class="page-title"> Buttons </h3> -->
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <!-- <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Buttons</li> -->
                     </ol>
                 </nav>
             </div>
@@ -17,7 +14,7 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Insert your New Product</h4>
+                            <h4 class="card-title">Product Mangement system</h4>
                             <div class="container mt-5">
                                 <div class="alert alert-warning alert-dismissible fade show d-none" id="errorAlert"
                                     role="alert">
@@ -115,20 +112,38 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('product.index') }}", // Correct route for fetching product index
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'name', name: 'name' },
-                { data: 'description', name: 'description' },
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'description',
+                    name: 'description'
+                },
                 {
                     data: 'image',
                     name: 'image',
                     render: function(data, type, full, meta) {
-                        return '<img src="{{ asset('uploads') }}/' + data + '" class="img-thumbnail" width="50">';
+                        return '<img src="{{ asset('uploads') }}/' + data +
+                            '" class="img-thumbnail" width="50">';
                     }
                 },
-                { data: 'price', name: 'price' },
-                { data: 'stock', name: 'stock' },
-                { data: 'store_id', name: 'store_id' },
+                {
+                    data: 'price',
+                    name: 'price'
+                },
+                {
+                    data: 'stock',
+                    name: 'stock'
+                },
+                {
+                    data: 'store_id',
+                    name: 'store_id'
+                },
                 {
                     data: 'action',
                     name: 'action',
@@ -192,4 +207,3 @@
         }
     });
 </script>
-

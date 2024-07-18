@@ -98,7 +98,7 @@
                                             <i class="ti-search"></i>
                                         </div>
                                     </li>
-                                    @if (Auth::user()->role_id==3)
+                                    @can('isUser')
                                     <a href="{{ route('cart.get') }}">
                                         <li class="list-inline-item dropdown">
                                             <div class="card-stor">
@@ -107,7 +107,7 @@
                                             </div>
                                         </li>
                                     </a>
-                                    @endif
+                                    @endcan
                                 </ul>
                             </div>
                         </div>

@@ -110,15 +110,16 @@
                             <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                         </a>
                     </li>
-
-                    @if (Auth::user()->role_id == 1)
+                    @can('isSuperAdmin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('dashboard.page') }}">
                                 <span class="menu-title">Dashboard</span>
                                 <i class="mdi mdi-home menu-icon"></i>
                             </a>
                         </li>
-                    @endif
+                    @endcan
+                    {{-- @if (Auth::user()->role_id == 1)
+                    @endif --}}
 
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
@@ -129,16 +130,18 @@
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
-                                @if (Auth::user()->role_id == 2)
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('product.crud.page') }}">Product CRUD</a>
-                                    </li>
+                                @can('isStoreOwner')
+                                {{-- @if (Auth::user()->role_id == 2) --}}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('product.crud.page') }}">Product CRUD</a>
+                                </li>
 
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('trash.products') }}">Trash Products</a>
-                                    </li>
-                                @endif
-                                @if (Auth::user()->role_id == 1)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('trash.products') }}">Trash Products</a>
+                                </li>
+                                {{-- @endif --}}
+                                @endcan
+                                @can('isSuperAdmin')
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('category.page') }}">Category CRUD</a>
                                     </li>
@@ -147,28 +150,30 @@
                                         <a class="nav-link" href="{{ route('trash.categories') }}">Trash
                                             categories</a>
                                     </li>
-                                @endif
+                                @endcan
                             </ul>
                         </div>
                     </li>
+                    @can('isStoreOwner')
 
-                    @if (Auth::user()->role_id == 2)
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false"
-                                aria-controls="icons">
-                                <span class="menu-title">Orders</span>
-                                <i style="font-size: 18px; color: gray; margin-left: 7.8rem;"
-                                    class="ri-shopping-bag-2-fill"></i>
-                            </a>
-                            <div class="collapse" id="icons">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('orders.page') }}">ORDER TABLE</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    @endif
+                    {{-- @if (Auth::user()->role_id == 2) --}}
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false"
+                        aria-controls="icons">
+                        <span class="menu-title">Orders</span>
+                        <i style="font-size: 18px; color: gray; margin-left: 7.8rem;"
+                        class="ri-shopping-bag-2-fill"></i>
+                    </a>
+                    <div class="collapse" id="icons">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('orders.page') }}">ORDER TABLE</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {{-- @endif --}}
+                @endcan
                 </ul>
             </nav>
             <!-- partial -->

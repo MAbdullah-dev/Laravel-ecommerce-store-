@@ -4,7 +4,8 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">.
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }}</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('dashboardAssets/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -197,36 +198,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // $('#storeOwnersTable').DataTable();
-            // Show users table by default
-            $('#showUsersTable').addClass('active');
-            $('#usersTable').removeClass('hidden');
-            $('#usersTable').DataTable();
-
-
-            // Click event for Users Table button
-            $('#showUsersTable').click(function() {
-                $('#showUsersTable').addClass('active');
-                $('#showStoreOwnersTable').removeClass('active');
-                $('#usersTable').removeClass('hidden');
-                $('#storeOwnersTable').addClass('hidden');
-                $('#usersTable').DataTable();
-                $('#storeOwnersTable').DataTable().destroy();
-            });
-
-            // Click event for Store Owners Table button
-            $('#showStoreOwnersTable').click(function() {
-                $('#showStoreOwnersTable').addClass('active');
-                $('#showUsersTable').removeClass('active');
-                $('#usersTable').addClass('hidden');
-                $('#storeOwnersTable').removeClass('hidden');
-                $('#usersTable').DataTable().destroy();
-                $('#storeOwnersTable').DataTable();
-            });
-        });
-    </script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 </body>
 
 </html>

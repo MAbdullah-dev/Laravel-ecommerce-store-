@@ -53,7 +53,7 @@
                                         <label for="categories" class="form-label">Categories</label>
                                         <select class="form-control" id="categories" name="categories[]" multiple>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}"
+                                                <option style="color: black;font-weight: bolder" value="{{ $category->id }}"
                                                     {{ in_array($category->id, old('categories', [])) ? 'selected' : '' }}>
                                                     {{ $category->name }}
                                                 </option>
@@ -165,6 +165,7 @@
                 contentType: false,
                 success: function(response) {
                     alert('Product uploaded successfully');
+                    $('#uploadProductForm')[0].reset();
                     // Reload the DataTable
                     table.ajax.reload();
                 },

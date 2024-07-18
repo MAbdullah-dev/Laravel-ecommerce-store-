@@ -1,7 +1,7 @@
 <x-dashboard_component>
     <x-slot name="title">
         Dashboard Page
-      </x-slot>
+    </x-slot>
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">
@@ -104,6 +104,7 @@
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -112,9 +113,29 @@
                                                 <td>{{ $user->id }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
+                                                <td>
+                                                    @if ($user->trashed())
+                                                        <form action="{{ route('users.restore', $user->id) }}"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Are you sure you want to restore this user?');">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit"
+                                                                class="btn btn-success">Restore</button>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{ route('users.destroy', $user->id) }}"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                                 <!-- Store Owners Table -->
@@ -125,17 +146,38 @@
                                             <th>StoreName</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                    @foreach ($store_owners as $store_owner)
-                                        <tr>
-                                            <td>{{ $store_owner->id }}</td>
-                                            <td>{{ $store_owner->store->name }}</td>
-                                            <td>{{ $store_owner->name }}</td>
-                                            <td>{{ $store_owner->email }}</td>
-                                        </tr>
+                                        @foreach ($store_owners as $store_owner)
+                                            <tr>
+                                                <td>{{ $store_owner->id }}</td>
+                                                <td>{{ $store_owner->store->name }}</td>
+                                                <td>{{ $store_owner->name }}</td>
+                                                <td>{{ $store_owner->email }}</td>
+                                                <td>
+                                                    @if ($store_owner->trashed())
+                                                        <form action="{{ route('users.restore', $store_owner->id) }}"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Are you sure you want to restore this store owner?');">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit"
+                                                                class="btn btn-success">Restore</button>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{ route('users.destroy', $store_owner->id) }}"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Are you sure you want to delete this store owner?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    @endif
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -371,3 +413,33 @@
         <!-- partial -->
     </div>
 </x-dashboard_component>
+   <script>
+        $(document).ready(function() {
+            // $('#storeOwnersTable').DataTable();
+            // Show users table by default
+            $('#showUsersTable').addClass('active');
+            $('#usersTable').removeClass('hidden');
+            $('#usersTable').DataTable();
+
+
+            // Click event for Users Table button
+            $('#showUsersTable').click(function() {
+                $('#showUsersTable').addClass('active');
+                $('#showStoreOwnersTable').removeClass('active');
+                $('#usersTable').removeClass('hidden');
+                $('#storeOwnersTable').addClass('hidden');
+                $('#usersTable').DataTable();
+                $('#storeOwnersTable').DataTable().destroy();
+            });
+
+            // Click event for Store Owners Table button
+            $('#showStoreOwnersTable').click(function() {
+                $('#showStoreOwnersTable').addClass('active');
+                $('#showUsersTable').removeClass('active');
+                $('#usersTable').addClass('hidden');
+                $('#storeOwnersTable').removeClass('hidden');
+                $('#usersTable').DataTable().destroy();
+                $('#storeOwnersTable').DataTable();
+            });
+        });
+    </script>

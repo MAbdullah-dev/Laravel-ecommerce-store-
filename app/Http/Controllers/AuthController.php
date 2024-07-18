@@ -77,19 +77,22 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        // Attempt to authenticate user
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); // Regenerate session ID here
 
+            // Check if the authenticated user is soft deleted
+            $user = User::withTrashed()->where('email', $request->email)->first();
+
+            if ( $user->trashed()) {
+                Auth::logout(); // Logout the user if account is blocked
+                return redirect()->route('login')->withErrors(['email' => 'Your account is blocked.']);
+            }
+
             return redirect()->intended('/')->with('success', 'You are logged in!');
-        }else{
-            return redirect()->route('login')->with('error', 'email or password is incorrect');
-
+        } else {
+            return redirect()->route('login')->with('error', 'Email or password is incorrect.');
         }
-
-        // return back()->withErrors([
-        //     'email' => 'The provided credentials do not match our records.',
-        // ])->onlyInput('email');
-
     }
     public function logout()
     {

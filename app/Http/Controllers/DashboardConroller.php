@@ -10,8 +10,8 @@ class DashboardConroller extends Controller
 {
     public function dashboardpage()
     {
-        $users= User::where('role_id',3)->get();
-        $store_owners=User::where('role_id',2)->with('store')->get();
+        $users= User::where('role_id',3)->withTrashed()->get();
+        $store_owners=User::where('role_id',2)->with('store')->withTrashed()->get();
 
         return view('dashboard.homedashboard',compact('users','store_owners'));
     }

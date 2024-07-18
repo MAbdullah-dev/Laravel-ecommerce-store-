@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\CartController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductConroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardConroller;
 use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\ProductConroller;
-use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::get('/signup', [AuthController::class, 'signup'])->name('signuppage');
@@ -33,6 +34,9 @@ Route::middleware(['isValidUser', 'validRole:1'])->group(function () {
     Route::get('trash/categories', [CategoryController::class, 'trash_data'])->name('trash.categories');
     Route::get('restore/category/{id}', [CategoryController::class, 'restore_category'])->name('restore.category');
     Route::get('permanent/delete/category/{id}', [CategoryController::class, 'force_delete'])->name('permanent.delete.category');
+
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::put('/users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
 });
 
 Route::resource('product', ProductConroller::class);
@@ -69,4 +73,3 @@ Route::middleware(['isValidUser', 'validRole:3'])->group(function () {
 
     Route::get('product/{id}', [ProductConroller::class, 'show'])->name('product.show');
 });
-

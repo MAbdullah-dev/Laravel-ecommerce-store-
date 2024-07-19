@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
@@ -7,6 +8,7 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
@@ -77,26 +79,27 @@ class OrderController extends Controller
                 $actions = '<a href="' . route('order.items', $order->id) . '" class="btn btn-primary btn-sm">View Items</a>';
 
                 if ($order->status == 'Pending') {
-                    $actions .= '<a href="'.$approveUrl.'" class="btn btn-success btn-sm">Approve</a>';
-                    $actions .= '<a href="'.$rejectUrl.'" class="btn btn-danger btn-sm">Reject</a>';
+                    $actions .= '<a href="' . $approveUrl . '" class="btn btn-success btn-sm">Approve</a>';
+                    $actions .= '<a href="' . $rejectUrl . '" class="btn btn-danger btn-sm">Reject</a>';
                 }
 
                 return $actions;
             })
             ->rawColumns(['action'])
             ->make(true);
-
     }
-    public function getOrderItems($id)
+    public function getOrderItems($orderId)
     {
-        $orderItems = OrderItem::where('order_id',$id)->with('product')->get();
 
-        // foreach($orderItems as $items){
-        //     dd($items->product->name);
-        // }
-
-        return view('dashboard.pages.orderItems', compact('orderItems'));
+        if (Gate::allows('view-order', $orderId)) {
+            $orderItems = OrderItem::where('order_id', $orderId)->with('product')->get();
+            return view('dashboard.pages.orderItems', compact('orderItems'));
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
+
+
 
     public function approveOrder($id)
     {
@@ -117,5 +120,4 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'Order rejected successfully.');
     }
-
 }

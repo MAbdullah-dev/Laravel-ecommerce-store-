@@ -24,7 +24,7 @@ class AuthController extends Controller
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
-                'signup_type' => 'required|integer',
+                'signup_type' => 'required|integer|in:2,3',
                 'password' => 'required|between:8,255|confirmed',
                 'storeName' => 'required|string|max:255',
             ]);
@@ -48,7 +48,7 @@ class AuthController extends Controller
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
-                'signup_type' => 'required|integer',
+                'signup_type' => 'required|integer|in:2,3',
                 'password' => 'required|between:8,255|confirmed',
             ]);
 

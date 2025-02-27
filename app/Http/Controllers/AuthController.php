@@ -17,7 +17,6 @@ class AuthController extends Controller
 
     public function signup_req(Request $request)
     {
-
         // If the user is a seller, validate and create the store
         if ($request->signup_type == 2) {
             // Validate user input
@@ -34,7 +33,7 @@ class AuthController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'role_id' => $data['signup_type'],
-                'password' => $data['password'],
+                'password' => Hash::make($data['password']),
                 'signup_type' => $data['signup_type'],
             ]);
 
@@ -43,8 +42,7 @@ class AuthController extends Controller
                 'name' => $data['storeName'],
                 'user_id' => $user->id,
             ]);
-        }
-        else {
+        } else {
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
@@ -57,7 +55,7 @@ class AuthController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'role_id' => $data['signup_type'],
-                'password' => $data['password'],
+                'password' => Hash::make($data['password']),
                 'signup_type' => $data['signup_type'],
             ]);
         }
@@ -70,6 +68,7 @@ class AuthController extends Controller
     {
         return view('Auth.login');
     }
+
     public function login_req(Request $request)
     {
         $credentials = $request->validate([
@@ -84,7 +83,7 @@ class AuthController extends Controller
             // Check if the authenticated user is soft deleted
             $user = User::withTrashed()->where('email', $request->email)->first();
 
-            if ( $user->trashed()) {
+            if ($user->trashed()) {
                 Auth::logout(); // Logout the user if account is blocked
                 return redirect()->route('login')->withErrors(['email' => 'Your account is blocked.']);
             }
@@ -94,6 +93,7 @@ class AuthController extends Controller
             return redirect()->route('login')->with('error', 'Email or password is incorrect.');
         }
     }
+
     public function logout()
     {
         Auth::logout();
